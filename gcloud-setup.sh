@@ -1,6 +1,6 @@
 #!/usr/bin/env bash -ex
 
-NUM_NODES=3
+NUM_NODES=2
 ZONE=us-central1-b
 NAMESPACE=gcloud-test
 CHARTNAME=jhub
