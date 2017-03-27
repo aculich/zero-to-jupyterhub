@@ -15,7 +15,7 @@ git clone https://github.com/data-8/jupyterhub-k8s
 cd jupyterhub-k8s
 hubCookieSecret=$(openssl rand -hex 32)
 tokenProxy=$(openssl rand -hex 32)
-echo >config.yaml <<EOF
+cat >config.yaml <<EOF
 hub:
    # output of first execution of 'openssl rand -hex 32'
    cookieSecret: "${hubCookieSecret}"
