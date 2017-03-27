@@ -11,7 +11,6 @@ CLUSTER_NAME=test-cluster-1
 
 sudo gcloud components install kubectl
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
-helm init
 git clone https://github.com/data-8/jupyterhub-k8s
 cd jupyterhub-k8s
 hubCookieSecret=$(openssl rand -hex 32)
@@ -30,6 +29,7 @@ gcloud auth application-default login
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
 gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
+helm init
 helm install helm-chart --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 kubectl --namespace=${NAMESPACE} get pod
 kubectl --namespace=${NAMESPACE} get svc
