@@ -1,14 +1,44 @@
 #!/usr/bin/env bash -ex
 
-. gcloud-config.sh
+## default for testing to a teeny tiny cluster to avoid burning up
+## compute credits
+
+NUM_NODES=1
+INSTANCE_TYPE=g1-small
+NAMESPACE=gcloud-test
+CLUSTER_NAME=test-cluster-1
+CHARTNAME=jhub
+ZONE=us-central1-b
+
+
+## uncomment below to override above settings if you want a larger cluster
+
+# NUM_NODES=3
+# INSTANCE_TYPE=n1-standard-1
+# NAMESPACE=gcloud-test
+# CLUSTER_NAME=test-cluster-1
+# CHARTNAME=jhub
+# ZONE=us-central1-b
 
 ## Assume you are starting from Google Cloud Shel (GCS)
 ##   https://cloud.google.com/shell/
 
+cd $HOME
+git clone https://github.com/aculich/zero-to-jupyterhub/
+cd $HOME/zero-to-jupyterhub
+cat > gcloud-config.sh <<EOF
+NUM_NODES=${NUM_NODES}
+INSTANCE_TYPE=${INSTANCE_TYPE}
+NAMESPACE=${NAMESPACE}
+CLUSTER_NAME=${CLUSTER_NAME}
+CHARTNAME=${CHARTNAME}
+ZONE=${ZONE}
+EOF
+cd $HOME
 sudo gcloud components install kubectl
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 git clone https://github.com/data-8/jupyterhub-k8s
-cd jupyterhub-k8s
+cd $HOME/jupyterhub-k8s
 hubCookieSecret=$(openssl rand -hex 32)
 tokenProxy=$(openssl rand -hex 32)
 cat >config.yaml <<EOF
