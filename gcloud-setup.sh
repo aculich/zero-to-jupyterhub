@@ -24,7 +24,9 @@ cat config.yaml
 gcloud auth application-default login
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
-gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
+time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
+echo "Sleeping for 3 seconds to let things settle..."
+sleep 3
 helm init
 helm install helm-chart --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 kubectl --namespace=${NAMESPACE} get pod
