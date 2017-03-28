@@ -1,10 +1,6 @@
 #!/usr/bin/env bash -ex
 
-NUM_NODES=2
-ZONE=us-central1-b
-NAMESPACE=gcloud-test
-CHARTNAME=jhub
-CLUSTER_NAME=test-cluster-1
+. gcloud-config.sh
 
 ## Assume you are starting from Google Cloud Shel (GCS)
 ##   https://cloud.google.com/shell/
