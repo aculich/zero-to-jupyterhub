@@ -58,13 +58,7 @@ gcloud config get-value project
 time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
 echo "Sleeping for 3 seconds to let things settle..."
 sleep 3
-# FIXME: https://github.com/kubernetes/helm/issues/2114
-# FIXME: pull request needs to be merged before this will work
-# FIXME: may be moot if helm install --wait is all that's needed
-# helm init --wait
 helm init
-# FIXME: https://github.com/kubernetes/helm/issues/1805
-# FIXME: have not yet tested whether --wait works with helm install
 helm install --wait helm-chart --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 kubectl --namespace=${NAMESPACE} get pod
 kubectl --namespace=${NAMESPACE} get svc
