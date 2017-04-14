@@ -51,7 +51,7 @@ token:
     proxy: "${tokenProxy}"
 EOF
 cat config.yaml
-#gcloud auth login
+gcloud auth login
 gcloud auth application-default login
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
