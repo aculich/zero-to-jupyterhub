@@ -62,6 +62,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc" 
 helm init
-helm install --wait helm-chart --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
-kubectl --namespace=${NAMESPACE} get pod
-kubectl --namespace=${NAMESPACE} get svc
+cd $HOME/jupyterhub-k8s
+JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
+helm install ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f conf
+ig.yaml
