@@ -4,11 +4,11 @@
 ## compute credits
 
 NUM_NODES=1
-INSTANCE_TYPE=g1-small
+INSTANCE_TYPE=n1-standard-1
 NAMESPACE=gcloud-test
-CLUSTER_NAME=test-cluster-1
-CHARTNAME=jhub
-ZONE=us-central1-b
+CLUSTER_NAME=test-cluster-a
+CHARTNAME=jhub-1
+ZONE=us-central1-f
 
 
 ## uncomment below to override above settings if you want a larger cluster
@@ -18,7 +18,7 @@ ZONE=us-central1-b
 # NAMESPACE=gcloud-test
 # CLUSTER_NAME=test-cluster-1
 # CHARTNAME=jhub
-# ZONE=us-central1-b
+# ZONE=us-central1-f
 
 ## Assume you are starting from Google Cloud Shel (GCS)
 ##   https://cloud.google.com/shell/
