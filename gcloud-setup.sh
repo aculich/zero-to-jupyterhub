@@ -35,6 +35,7 @@ CHARTNAME=${CHARTNAME}
 ZONE=${ZONE}
 EOF
 cd $HOME
+sudo gcloud components update --version=149.0.0
 sudo gcloud components install kubectl
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 git clone https://github.com/data-8/jupyterhub-k8s
