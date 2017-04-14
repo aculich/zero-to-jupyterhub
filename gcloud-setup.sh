@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -ex
+#!/bin/bash -ex
 
 ## default for testing to a teeny tiny cluster to avoid burning up
 ## compute credits
