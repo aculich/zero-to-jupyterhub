@@ -25,6 +25,7 @@ ZONE=us-central1-f
 
 cd $HOME
 git clone https://github.com/aculich/zero-to-jupyterhub/
+git clone https://github.com/data-8/jupyterhub-k8s/
 cd $HOME/zero-to-jupyterhub
 cat > gcloud-config.sh <<EOF
 NUM_NODES=${NUM_NODES}
@@ -34,11 +35,6 @@ CLUSTER_NAME=${CLUSTER_NAME}
 CHARTNAME=${CHARTNAME}
 ZONE=${ZONE}
 EOF
-cd $HOME
-sudo gcloud components update --version=149.0.0
-sudo gcloud components install kubectl
-curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
-git clone https://github.com/data-8/jupyterhub-k8s
 cd $HOME/jupyterhub-k8s
 hubCookieSecret=$(openssl rand -hex 32)
 tokenProxy=$(openssl rand -hex 32)
@@ -51,13 +47,17 @@ token:
     proxy: "${tokenProxy}"
 EOF
 cat config.yaml
+sudo gcloud components update --version=149.0.0
+sudo gcloud components install kubectl
 gcloud auth login
 gcloud auth application-default login
+chown -R $USER $HOME/.config
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
 time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
-echo "Sleeping for 3 seconds to let things settle..."
-sleep 3
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
+echo "Run this in another tab while helm install is --wait'ing"
+echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc" 
 helm init
 helm install --wait helm-chart --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 kubectl --namespace=${NAMESPACE} get pod
