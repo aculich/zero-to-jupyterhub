@@ -23,6 +23,7 @@ ZONE=us-central1-f
 ## Assume you are starting from Google Cloud Shel (GCS)
 ##   https://cloud.google.com/shell/
 
+rm -rf ~/zero-to-jupyterhub ~/jupyterhub-k8s
 cd $HOME
 git clone https://github.com/aculich/zero-to-jupyterhub/
 git clone https://github.com/data-8/jupyterhub-k8s/
