@@ -54,7 +54,9 @@ gcloud auth application-default login
 chown -R $USER $HOME/.config
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
-time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
+gcloud config set compute/zone ${ZONE}
+gcloud config get-value compute/zone
+time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES}
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc" 
