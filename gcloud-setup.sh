@@ -51,7 +51,7 @@ sudo gcloud components update --version=149.0.0
 sudo gcloud components install kubectl
 gcloud auth login
 gcloud auth application-default login
-chown -R $USER $HOME/.config
+sudo chown -R $USER $HOME/.config
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
 gcloud config set compute/zone ${ZONE}
