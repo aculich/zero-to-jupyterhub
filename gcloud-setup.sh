@@ -51,12 +51,12 @@ sudo gcloud components update --version=149.0.0
 sudo gcloud components install kubectl
 gcloud auth login
 gcloud auth application-default login
-sudo chown -R $USER $HOME/.config
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
 gcloud config set compute/zone ${ZONE}
 gcloud config get-value compute/zone
 time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES}
+sudo chown -R $USER $HOME/.config
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc" 
