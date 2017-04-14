@@ -48,7 +48,7 @@ token:
     proxy: "${tokenProxy}"
 EOF
 cat config.yaml
-#sudo gcloud components update --version=149.0.0
+sudo gcloud components update --version=149.0.0
 sudo gcloud components install kubectl
 gcloud auth login
 gcloud auth application-default login
