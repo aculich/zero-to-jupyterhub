@@ -3,7 +3,7 @@
 ## default for testing to a teeny tiny cluster to avoid burning up
 ## compute credits
 
-NUM_NODES=1
+NUM_NODES=3
 INSTANCE_TYPE=n1-standard-1
 NAMESPACE=gcloud-test
 CLUSTER_NAME=test-cluster-a
