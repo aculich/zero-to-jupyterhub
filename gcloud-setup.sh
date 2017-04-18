@@ -45,6 +45,10 @@ hub:
 token:
     # output of second execution of 'openssl rand -hex 32'
     proxy: "${tokenProxy}"
+singleuser:
+    image:
+       name: jupyter/datascience-notebook
+       tag: latest
 EOF
 cat config.yaml
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
