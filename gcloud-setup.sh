@@ -23,10 +23,9 @@ ZONE=us-central1-f
 ## Assume you are starting from Google Cloud Shel (GCS)
 ##   https://cloud.google.com/shell/
 
-rm -rf ~/zero-to-jupyterhub ~/jupyterhub-k8s
+rm -rf ~/zero-to-jupyterhub
 cd $HOME
 git clone https://github.com/aculich/zero-to-jupyterhub/
-git clone https://github.com/data-8/jupyterhub-k8s/
 cd $HOME/zero-to-jupyterhub
 cat > gcloud-config.sh <<EOF
 NUM_NODES=${NUM_NODES}
@@ -36,7 +35,7 @@ CLUSTER_NAME=${CLUSTER_NAME}
 CHARTNAME=${CHARTNAME}
 ZONE=${ZONE}
 EOF
-cd $HOME/jupyterhub-k8s
+
 hubCookieSecret=$(openssl rand -hex 32)
 tokenProxy=$(openssl rand -hex 32)
 cat >config.yaml <<EOF
@@ -62,7 +61,5 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc" 
 helm init
-cd $HOME/jupyterhub-k8s
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
-helm install ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f conf
-ig.yaml
+helm install ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
