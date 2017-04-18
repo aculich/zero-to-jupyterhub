@@ -54,9 +54,7 @@ gcloud auth login
 gcloud auth application-default login
 gcloud config set project ${DEVSHELL_PROJECT_ID}
 gcloud config get-value project
-gcloud config set compute/zone ${ZONE}
-gcloud config get-value compute/zone
-time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES}
+time gcloud container clusters create ${CLUSTER_NAME} --num-nodes=${NUM_NODES} --zone=${ZONE}
 sudo chown -R $USER $HOME/.config || echo "ignoring chown error"
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 echo "Run this in another tab while helm install is --wait'ing"
