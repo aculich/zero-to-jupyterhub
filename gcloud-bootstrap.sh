@@ -58,7 +58,8 @@ project=${project}
 EOF
 
 set -x
-project_number=$(curl "http://metadata.google.internal/computeMetadata/v1/project/numeric-project-id" -H "Metadata-Flavor: Google")
+# project_number=$(curl "http://metadata.google.internal/computeMetadata/v1/project/numeric-project-id" -H "Metadata-Flavor: Google")
+project_number=$(gcloud projects describe $DEVSHELL_PROJECT_ID --format json | jq -r '.projectNumber')
 service_account="${project_number}-compute@developer.gserviceaccount.com"
 startup_script="https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-controller-setup.sh"
 
