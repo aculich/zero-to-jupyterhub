@@ -66,3 +66,5 @@ echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE}
 helm init
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
 helm install --wait ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
+# gcloud container clusters get-credentials binder-cluster-dev --zone=us-central1-a
+
