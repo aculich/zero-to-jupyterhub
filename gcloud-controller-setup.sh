@@ -21,10 +21,12 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo
 wget --directory-prefix=/tmp https://github.com/openshift/source-to-image/releases/download/v1.1.5/source-to-image-v1.1.5-4dd7721-linux-amd64.tar.gz
 (cd /usr/local/bin && tar --no-overwrite-dir -zxvf /tmp/source-to-image-v1.1.5-4dd7721-linux-amd64.tar.gz)
 
-DEFAULT_USER=$(getent passwd 1000 | cut -d: -f1)
 ## automatically install and enable byobu for the default user
 apt-get -y install byobu
+DEFAULT_USER=$(getent passwd 1000 | cut -d: -f1)
 sudo -u $DEFAULT_USER -i /usr/bin/byobu-launcher-install
+SECONDARY_USER=$(getent passwd 1001 | cut -d: -f1)
+sudo -u $SECONDARY_USER -i /usr/bin/byobu-launcher-install
 
 project=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
 zone=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/zone" -H "Metadata-Flavor: Google" | cut -d/ -f4)
