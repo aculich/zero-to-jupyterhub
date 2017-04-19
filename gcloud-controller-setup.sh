@@ -16,7 +16,8 @@ echo "deb https://packages.cloud.google.com/apt $CLOUD_SDK_REPO main" | sudo tee
 curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 
 # Update the package list and install the Cloud SDK
-sudo apt-get update && sudo apt-get install google-cloud-sdk=140.0.0-0ubuntu1~16.10 kubectl
+sudo apt-get update && sudo apt-get install --yes google-cloud-sdk=140.0.0-0ubuntu1~16.10 kubectl
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 
 project=$(curl "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
 zone=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/zone" -H "Metadata-Flavor: Google" | cut -d/ -f4)
