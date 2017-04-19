@@ -19,7 +19,7 @@ curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
 sudo apt-get update && sudo apt-get install --yes google-cloud-sdk=140.0.0-0ubuntu1~16.10 kubectl jq
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo bash
 wget --directory-prefix=/tmp https://github.com/openshift/source-to-image/releases/download/v1.1.5/source-to-image-v1.1.5-4dd7721-linux-amd64.tar.gz
-(cd /usr/local/bin && tar zxvf /tmp/source-to-image-v1.1.5-4dd7721-linux-amd64.tar.gz)
+(cd /usr/local/bin && tar --no-overwrite-dir -zxvf /tmp/source-to-image-v1.1.5-4dd7721-linux-amd64.tar.gz)
 
 project=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
 zone=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/zone" -H "Metadata-Flavor: Google" | cut -d/ -f4)
