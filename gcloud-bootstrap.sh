@@ -29,7 +29,7 @@ EOF
     exit 1
 }
 
-project=""
+project="${DEVSHELL_PROJECT_ID}"
 while [ $# -gt 0 ] ; do
     case "$1" in
     -h|--help)
