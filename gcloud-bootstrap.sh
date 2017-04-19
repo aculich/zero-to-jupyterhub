@@ -40,10 +40,10 @@ while [ $# -gt 0 ] ; do
         usage "Unknown option '$1'"
         ;;
     *)
-        if [ -z "$repo" ] ; then
+        if [ -z "$project" ] ; then
             project="$1"
-        elif
-            repo="$2"
+        elif [ -z "$repo" ] ; then
+            repo="$1"
         else
             usage "Too many arguments"
         fi
