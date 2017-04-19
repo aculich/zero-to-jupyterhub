@@ -10,5 +10,5 @@ See step-by-step manual instructions at: [Zero to JupyterHub in 15 minutes](http
 Execute the following from GCS (Google Cloud Shell): [https://cloud.google.com/shell/](https://cloud.google.com/shell/)
 
 ```
-time bash -ex <(curl -s https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-setup.sh)
+REPO=https://github.com/user/repo bash <(curl -s https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-bootstrap.sh)
 ```

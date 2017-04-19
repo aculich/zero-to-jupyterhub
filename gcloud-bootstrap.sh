@@ -15,7 +15,7 @@ usage() {
     fi
 
     cat << EOF
-Usage: $PROGNAME [OPTION ...] [project]
+Usage: $PROGNAME [OPTION ...] [project] [repo]
 Bootstrap on Google Cloud Platform (GCP).
 
 On Google Cloud Shell you can invoke as:
@@ -30,6 +30,7 @@ EOF
 }
 
 project="${DEVSHELL_PROJECT_ID}"
+repo="${REPO}"
 while [ $# -gt 0 ] ; do
     case "$1" in
     -h|--help)
@@ -39,8 +40,10 @@ while [ $# -gt 0 ] ; do
         usage "Unknown option '$1'"
         ;;
     *)
-        if [ -z "$project" ] ; then
+        if [ -z "$repo" ] ; then
             project="$1"
+        elif
+            repo="$2"
         else
             usage "Too many arguments"
         fi
@@ -49,12 +52,13 @@ while [ $# -gt 0 ] ; do
     shift
 done
 
-if [ -z "$project" ] ; then
+if [ -z "$repo" ] ; then
     usage "Not enough arguments"
 fi
 
 cat <<EOF
 project=${project}
+repo=${repo}
 EOF
 
 set -x
@@ -63,5 +67,4 @@ project_number=$(gcloud projects describe $DEVSHELL_PROJECT_ID --format json | j
 service_account="${project_number}-compute@developer.gserviceaccount.com"
 startup_script="https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-controller-setup.sh"
 
-gcloud compute --project "${project}" instances create "jhub-controller" --zone "us-central1-f" --machine-type "g1-small" --subnet "default" --metadata "startup-script=${startup_script}" --maintenance-policy "MIGRATE" --service-account "${service_account}" --scopes "https://www.googleapis.com/auth/cloud-platform" --tags "bootstrapped" --image "ubuntu-1610-yakkety-v20170330" --image-project "ubuntu-os-cloud" --boot-disk-size "20" --boot-disk-type "pd-ssd" --boot-disk-device-name "jhub-controller"
-
+gcloud compute --project "${project}" instances create "jhub-controller" --zone "us-central1-f" --machine-type "g1-small" --subnet "default" --metadata "project=${project},repo=${repo},startup-script=${startup_script}" --maintenance-policy "MIGRATE" --service-account "${service_account}" --scopes "https://www.googleapis.com/auth/cloud-platform" --tags "bootstrapped" --image "ubuntu-1610-yakkety-v20170330" --image-project "ubuntu-os-cloud" --boot-disk-size "20" --boot-disk-type "pd-ssd" --boot-disk-device-name "jhub-controller"
