@@ -67,7 +67,7 @@ make
 s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/default-image:latest
 gcloud docker -- push gcr.io/${project}/default-image:latest
 
-
+cd $HOME/zero-to-jupyterhub
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 sudo gcloud components update --quiet --version=149.0.0
 sudo gcloud components install kubectl
