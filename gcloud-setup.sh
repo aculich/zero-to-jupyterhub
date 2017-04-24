@@ -80,7 +80,8 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc"
 helm init
-sleep 20
+echo "Waiting for 90 seconds before helm install"
+sleep 90
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
 helm install --wait --timeout=900 ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 
