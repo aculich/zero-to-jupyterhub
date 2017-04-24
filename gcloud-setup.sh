@@ -68,14 +68,9 @@ s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/de
 gcloud docker -- push gcr.io/${project}/default-image:latest
 
 cd $HOME/zero-to-jupyterhub
-export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-sudo gcloud components update --quiet --version=149.0.0
-sudo gcloud components install kubectl
 ## logins are not required when running on gcp instances
 #gcloud auth login
 #gcloud auth application-default login
-gcloud config set project ${DEVSHELL_PROJECT_ID}
-gcloud config get-value project
 
 time gcloud container clusters create ${CLUSTER_NAME} --project ${project} --num-nodes=${NUM_NODES} --zone=${ZONE}
 
@@ -85,7 +80,7 @@ curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get | sudo
 echo "Run this in another tab while helm install is --wait'ing"
 echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE} get svc"
 helm init
-
+sleep 20
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
 helm install --wait ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 
