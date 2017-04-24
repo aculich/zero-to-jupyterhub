@@ -43,7 +43,10 @@ apt-get install -y --no-install-recommends \
     apt-transport-https \
     ca-certificates \
     curl \
-    software-properties-common
+    software-properties-common \
+    make \
+    wget \
+    uuid
 
 curl -fsSL https://apt.dockerproject.org/gpg | apt-key add -
 apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
