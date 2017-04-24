@@ -62,7 +62,7 @@ EOF
 cat config.yaml
 
 git clone https://github.com/aculich/s2i-builders
-cd $HOME/s2i-builders/singleuser-builder
+cd $HOME/zero-to-jupyterhub/s2i-builders/singleuser-builder
 make
 s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/default-image:latest
 gcloud docker -- push gcr.io/${project}/default-image:latest
