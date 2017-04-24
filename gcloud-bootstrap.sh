@@ -68,3 +68,7 @@ service_account="${project_number}-compute@developer.gserviceaccount.com"
 startup_script="https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-controller-setup.sh"
 
 gcloud compute --project "${project}" instances create "jhub-controller" --zone "us-central1-f" --machine-type "g1-small" --subnet "default" --metadata "project=${project},repo=${repo},startup-script-url=${startup_script}" --maintenance-policy "MIGRATE" --service-account "${service_account}" --scopes "https://www.googleapis.com/auth/cloud-platform" --tags "bootstrapped" --image "ubuntu-1610-yakkety-v20170330" --image-project "ubuntu-os-cloud" --boot-disk-size "20" --boot-disk-type "pd-ssd" --boot-disk-device-name "jhub-controller"
+
+echo "Waiting 20 seconds for system to boot and begin logging..."
+sleep 20
+gcloud compute --project "${project}" ssh --zone "${zone}" "ubuntu@jhub-controller" --command "sudo tail -f /var/log/syslog"
