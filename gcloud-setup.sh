@@ -82,7 +82,7 @@ echo "kubectl --namespace=${NAMESPACE} get pod; kubectl --namespace=${NAMESPACE}
 helm init
 sleep 20
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
-helm install --wait ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
+helm install --wait --timeout=900 ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
 
 # helm upgrade ${CHARTNAME} ${JUPYTER_CHART} -f config.yaml
 
