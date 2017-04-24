@@ -71,14 +71,14 @@ apt-get -y install docker-engine=$VERSION
 ## have to type `sudo docker` each time.
 ## https://www.explainxkcd.com/wiki/index.php/149:_Sandwich
 DEFAULT_USER=$(getent passwd 1000 | cut -d: -f1)
-SECONDARY_USER=$(getent passwd 1001 | cut -d: -f1)
+#SECONDARY_USER=$(getent passwd 1001 | cut -d: -f1)
 adduser $DEFAULT_USER docker
-adduser $SECONDARY_USER docker
+#adduser $SECONDARY_USER docker
 
 ## automatically install and enable byobu for the default user
 apt-get -y install byobu
 sudo -u $DEFAULT_USER -i /usr/bin/byobu-launcher-install
-sudo -u $SECONDARY_USER -i /usr/bin/byobu-launcher-install
+#sudo -u $SECONDARY_USER -i /usr/bin/byobu-launcher-install
 
 project=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
 zone=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/zone" -H "Metadata-Flavor: Google" | cut -d/ -f4)
