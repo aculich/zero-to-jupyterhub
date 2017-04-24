@@ -86,3 +86,5 @@ sudo -u $DEFAULT_USER -i /usr/bin/byobu-launcher-install
 project=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/project/project-id" -H "Metadata-Flavor: Google")
 zone=$(curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/zone" -H "Metadata-Flavor: Google" | cut -d/ -f4)
 repo=$( curl --silent "http://metadata.google.internal/computeMetadata/v1/instance/attributes/?recursive=true" -H "Metadata-Flavor: Google" | jq -r '.repo')
+
+sudo -u $DEFAULT_USER -i "bash -ex <(curl --silent 'https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-controller-setup.sh?$(uuid)')"
