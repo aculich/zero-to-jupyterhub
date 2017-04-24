@@ -13,6 +13,11 @@ Execute the following from GCS (Google Cloud Shell): [https://cloud.google.com/s
 REPO=https://github.com/user/repo bash <(curl -s https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-bootstrap.sh)
 ```
 
+For example, you can try this test repo:
+```
+REPO=https://github.com/aculich/mlwg-boston/ bash <(curl -s https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-bootstrap.sh)
+```
+
 To completely destroy everything run this from GCS:
 ```
 bash <(curl -s https://raw.githubusercontent.com/aculich/zero-to-jupyterhub/master/gcloud-destroy.sh)
