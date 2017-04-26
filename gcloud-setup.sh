@@ -84,6 +84,7 @@ echo "Waiting for 90 seconds before helm install"
 sleep 90
 JUPYTER_CHART=https://github.com/jupyterhub/helm-chart/releases/download/v0.1/jupyterhub-0.1.tgz
 helm install --wait --timeout=900 ${JUPYTER_CHART} --name=${CHARTNAME} --namespace=${NAMESPACE} -f config.yaml
+helm status ${CHARTNAME}
 
 # helm upgrade ${CHARTNAME} ${JUPYTER_CHART} -f config.yaml
 
