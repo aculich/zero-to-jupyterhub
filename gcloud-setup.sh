@@ -64,7 +64,7 @@ cat config.yaml
 git clone https://github.com/aculich/s2i-builders
 cd $HOME/zero-to-jupyterhub/s2i-builders/singleuser-builder
 make
-s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/singleuser-image:latest
+s2i build ${repo} jupyterhub/singleuser-builder:$(cat version) gcr.io/${project}/singleuser-image:latest
 gcloud docker -- push gcr.io/${project}/singleuser-image:latest
 
 cd $HOME/zero-to-jupyterhub
