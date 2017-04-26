@@ -54,7 +54,7 @@ token:
     proxy: "${tokenProxy}"
 singleuser:
   image:
-    name: gcr.io/${project}/default-image
+    name: gcr.io/${project}/singleuser-image
     tag: latest
 storage:
   type: none
@@ -64,8 +64,8 @@ cat config.yaml
 git clone https://github.com/aculich/s2i-builders
 cd $HOME/zero-to-jupyterhub/s2i-builders/singleuser-builder
 make
-s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/default-image:latest
-gcloud docker -- push gcr.io/${project}/default-image:latest
+s2i build ${repo} aculich/singleuser-builder:$(cat version) gcr.io/${project}/singleuser-image:latest
+gcloud docker -- push gcr.io/${project}/singleuser-image:latest
 
 cd $HOME/zero-to-jupyterhub
 ## logins are not required when running on gcp instances
